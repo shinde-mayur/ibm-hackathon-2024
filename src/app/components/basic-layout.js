@@ -12,7 +12,7 @@ const user = {
 }
 const navigation = [
     { name: 'View Nearby', href: '/dashboard', },
-    { name: 'Communities', href: '/profile', },
+    { name: 'Communities', href: '/community', },
     { name: 'About', href: '/about', },
 ]
 const userNavigation = [
@@ -20,10 +20,11 @@ const userNavigation = [
     { name: 'Sign out', href: '#' },
 ]
 
-export default function BasicLayout({ children, title }) {
+export default function BasicLayout({ children, title, description,className }) {
     const pathname = usePathname();
     return (
         <div className="min-h-full">
+            {/* <Disclosure as="nav" className="bg-gray-800 fixed top-0 z-10 w-full"> */}
             <Disclosure as="nav" className="bg-gray-800">
                 {({ open }) => (
                     <>
@@ -98,14 +99,14 @@ export default function BasicLayout({ children, title }) {
                         </div>
 
                         <Disclosure.Panel className="md:hidden">
-                            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 ">
                                 <Navigation navigation={navigation}
                                     pathname={pathname}
                                     as={Disclosure.Button}
                                     activeClasses={(active) => classNames(active
                                         ? 'bg-gray-900 text-white'
                                         : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block rounded-md px-3 py-2 text-base font-medium')} />
+                                        'block rounded-md px-3 py-2 text-base font-medium ')} />
                             </div>
                             <div className="border-t border-gray-700 pb-3 pt-4">
                                 <div className="flex items-center px-5">
@@ -137,6 +138,7 @@ export default function BasicLayout({ children, title }) {
                 <header className="bg-white shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">{title}</h1>
+                        {description && <p className="text-sm text-muted-foreground">{description}</p>}
                     </div>
                 </header>
             }

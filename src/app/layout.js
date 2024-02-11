@@ -14,9 +14,8 @@ import { ToastContainer } from 'react-toastify';
 export default function RootLayout({ children }) {
     return (
 
-        <html className="h-full bg-gray-100">
-            <body className="h-full">
-                {/* <body className="h-full bg-white"> */}
+        <html className="h-full ">
+            <body className="h-full bg-white">
                 {children}
                 <ToastContainer />
             </body>
