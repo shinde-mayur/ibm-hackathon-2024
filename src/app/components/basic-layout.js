@@ -40,7 +40,7 @@ export default function BasicLayout({ children, title, description, className })
                             <div className="flex h-16 items-center justify-between">
                                 <div className="flex items-center">
                                     <div className="flex-shrink-0">
-                                        <img
+                                        <Image
                                             className="h-8 w-8"
                                             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                                             alt="Your Company"
