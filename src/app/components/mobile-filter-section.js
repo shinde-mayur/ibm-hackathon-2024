@@ -3,8 +3,10 @@ import { Disclosure } from '@headlessui/react'
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 
 export default function FilterSection({ section }) {
+    const section_id = section.title.toLowerCase()
+
     return (
-        <Disclosure as="div" key={section.title} className="border-t border-gray-200 px-4 py-6">
+        <Disclosure as="div"  className="border-t border-gray-200 px-4 py-6">
             {({ open }) => (
                 <>
                     <h3 className="-mx-2 -my-3 flow-root">
@@ -22,19 +24,19 @@ export default function FilterSection({ section }) {
                     <Disclosure.Panel className="pt-6">
                         <div className="space-y-6">
                             {section.options.map((option, optionIdx) => (
-                                <div key={option} className="flex items-center">
+                                <div key={option.title} className="flex items-center">
                                     <input
-                                        id={`filter-mobile-${section.title}-${optionIdx}`}
-                                        name={`${section.title}[]`}
-                                        defaultValue={option}
+                                        id={`filter-mobile-${section_id}-${optionIdx}`}
+                                        name={`${section_id}[]`}
+                                        defaultValue={option.id}
                                         type="checkbox"
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                     />
                                     <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                        htmlFor={`filter-mobile-${section_id}-${optionIdx}`}
                                         className="ml-3 min-w-0 flex-1 text-gray-500"
                                     >
-                                        {option}
+                                        {option.title}
                                     </label>
                                 </div>
                             ))}

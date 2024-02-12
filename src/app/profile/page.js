@@ -1,150 +1,70 @@
+'use client'
+
+
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import BasicLayout from "../components/basic-layout";
-
+import UserForm from "../components/user-form";
 export default function ProfilePage() {
-    return <>
-        <BasicLayout title="Profile">
-            <form className='bg-white p-4 rounded-md shadow'>
-                <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-                    <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+    const [user, setUser] = useState(null)
+    const [isLoading, setLoading] = useState(true)
+    const [communities, setCommunities] = useState(null)
+    const [ethnicities, setEthnicities] = useState([])
+    const [courseYears, setCourseYears] = useState([])
+    const [courses, setCourses] = useState([])
 
-                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                        <div className="sm:col-span-3">
-                            <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                                First name
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    type="text"
-                                    name="first-name"
-                                    id="first-name"
-                                    autoComplete="given-name"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
+    useEffect(() => {
+        var cookie = require("@boiseitguru/cookie-cutter");
+        cookie.get('token',)
+        fetch('http://localhost:8000/community/user/', {
+            headers: {
+                'Authorization': `Token ${cookie.get('token',)}`
+            }
+        }).then(res => res.json())
+            .then((data) => {
+                if(!data.result) throw new Error(data.message)
+                setUser(data.user)
+                setLoading(false)
+            })
+            .catch((error) => {
+                toast.error('Error fetching user details');
+                console.error('Error:', error);
+                setLoading(false);
+            });
+        fetch('http://localhost:8000/community/')
+            .then((res) => res.json())
+            .then((data) => {
 
-                        <div className="sm:col-span-3">
-                            <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
-                                Last name
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    type="text"
-                                    name="last-name"
-                                    id="last-name"
-                                    autoComplete="family-name"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
+                data.result.forEach((item) => {
+                    switch (item.title) {
+                        case 'Ethnicities':
+                            setEthnicities(item.options)
+                            break;
 
-                        <div className="sm:col-span-4">
-                            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                                Email address
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
+                        case 'Course Years':
+                            setCourseYears(item.options)
+                            break;
+                        default:
+                            setCourses(item.options)
+                            break;
+                    }
+                })
+            })
+            .catch((error) => {
+                console.log('Error:', error);
+                toast.error('Error fetching communities');
+            });
+    }, [])
+    return <BasicLayout title="Profile">
+        {
+            isLoading &&
+            <div className="flex justify-center items-center mt-8">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+            </div>
+        }
+        {user && <UserForm user={user} ethnicities={ethnicities} courses={courses} courseYears={courseYears} />}
 
-                        <div className="sm:col-span-3">
-                            <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
-                                Country
-                            </label>
-                            <div className="mt-2">
-                                <select
-                                    id="country"
-                                    name="country"
-                                    autoComplete="country-name"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                                >
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>Mexico</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="col-span-full">
-                            <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
-                                Street address
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    type="text"
-                                    name="street-address"
-                                    id="street-address"
-                                    autoComplete="street-address"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="sm:col-span-2 sm:col-start-1">
-                            <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
-                                City
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    type="text"
-                                    name="city"
-                                    id="city"
-                                    autoComplete="address-level2"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="sm:col-span-2">
-                            <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
-                                State / Province
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    type="text"
-                                    name="region"
-                                    id="region"
-                                    autoComplete="address-level1"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="sm:col-span-2">
-                            <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
-                                ZIP / Postal code
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    type="text"
-                                    name="postal-code"
-                                    id="postal-code"
-                                    autoComplete="postal-code"
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Save
-                    </button>
-                </div>
-            </form>
-        </BasicLayout>
-    </>
+    </BasicLayout>
 }
+
+

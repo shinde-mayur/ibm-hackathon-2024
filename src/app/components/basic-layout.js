@@ -1,30 +1,38 @@
 'use client'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Fragment } from 'react'
+
 import Navigation from './navigation'
 const classNames = (...classes) => classes.filter(Boolean).join(' ')
-
+// import cookieCutter from 'cookie-cutter'
 const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
 }
-const navigation = [
-    { name: 'View Nearby', href: '/dashboard', },
-    { name: 'Communities', href: '/community', },
-    { name: 'About', href: '/about', },
-]
-const userNavigation = [
-    { name: 'Your Profile', href: '/profile' },
-    { name: 'Sign out', href: '#' },
-]
 
-export default function BasicLayout({ children, title, description,className }) {
+export default function BasicLayout({ children, title, description, className }) {
+    const router = useRouter()
+
+    const navigation = [
+        { name: 'View Nearby', href: '/', },
+        { name: 'Communities', href: '/community', },
+        { name: 'About', href: '/about', },
+    ]
+    const userNavigation = [
+        { name: 'Your Profile', href: '/profile' },
+        {
+            name: 'Sign out', onClick: () => {
+                var cookie = require("@boiseitguru/cookie-cutter");
+                cookie.set('token', '', { expires: new Date(0) })
+                router.push('/login')
+            }
+        },
+    ]
     const pathname = usePathname();
     return (
         <div className="min-h-full">
-            {/* <Disclosure as="nav" className="bg-gray-800 fixed top-0 z-10 w-full"> */}
             <Disclosure as="nav" className="bg-gray-800">
                 {({ open }) => (
                     <>

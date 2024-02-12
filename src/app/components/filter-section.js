@@ -2,7 +2,8 @@
 import { Disclosure } from '@headlessui/react'
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 
-export default function FilterSection({ section}) {
+export default function FilterSection({ section }) {
+    const section_id = section.title.toLowerCase()
     return (
         <Disclosure as="div" className="border-b border-gray-200 py-6">
             {({ open }) => (
@@ -22,20 +23,20 @@ export default function FilterSection({ section}) {
                     <Disclosure.Panel className="pt-6">
                         <div className="space-y-4">
                             {section.options.map((option, optionIdx) => (
-                                <div key={option} className="flex items-center">
+                                <div key={option.title} className="flex items-center">
                                     <input
-                                        id={`filter-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option}
+                                        id={`filter-${section_id}-${optionIdx}`}
+                                        name={`${section_id}[]`}
+                                        defaultValue={option.id}
                                         type="checkbox"
                                         defaultChecked={option.checked}
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                     />
                                     <label
-                                        htmlFor={`filter-${section.id}-${optionIdx}`}
+                                        htmlFor={`filter-${section_id}-${optionIdx}`}
                                         className="ml-3 text-sm text-gray-600"
                                     >
-                                        {option}
+                                        {option.title}
                                     </label>
                                 </div>
                             ))}

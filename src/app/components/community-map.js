@@ -5,7 +5,7 @@ import { memo, useCallback, useState } from 'react';
 
 import { toast } from 'react-toastify';
 
-const CommunityMap = () => {
+const CommunityMap = ({ markers }) => {
     const [currentLocation, setCurrentLocation] = useState(null);
 
     const { isLoaded } = useJsApiLoader({
@@ -36,17 +36,24 @@ const CommunityMap = () => {
 
     return isLoaded ? (
         <GoogleMap
-            mapContainerClassName='w-full h-[75vh] rounded-md shadow-md'
+            mapContainerClassName='w-full h-[40vh] rounded-md shadow-md'
             center={currentLocation}
-            zoom={20}
+            zoom={17}
             onLoad={onLoad}
             onUnmount={onUnmount}
         >
             {currentLocation && <Marker position={currentLocation} title="You're here" />}
+            {markers.map((m, i) => (
+                <Marker
+                    key={i}
+                    position={{ lat: m.latitude, lng: m.longitude }}
+                    title={`Found ${m.user_count} people near you`}
+                />
+            )
+            )}
             <></>
         </GoogleMap>
     ) : <></>
 }
 
 export default memo(CommunityMap)
-// export default MapWithCurrentLocation;
