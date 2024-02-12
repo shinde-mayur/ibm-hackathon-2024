@@ -34,9 +34,7 @@ const users = [
         phoneNum: 4412345678912
     }
 ]
-export const metadata = {
-    title: 'Find your local communities | UniVicinity',
-}
+
 
 
 export default function DashboardPage() {
