@@ -1,6 +1,7 @@
 'use client'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 

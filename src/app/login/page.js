@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 // import { useHistory } from 'react-router-dom';
 
 import LoginForm from '../components/login-form';
-
+import Image from 'next/image';
 export default function LoginPage() {
 
 
