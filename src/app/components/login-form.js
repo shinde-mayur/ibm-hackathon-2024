@@ -15,7 +15,7 @@ export default function LoginForm({ }) {
         const formData = new FormData(event.currentTarget)
         const username = formData.get('username')
         const password = formData.get('password')
-        fetch('http://142.93.42.73:8000/community/login/', {
+        fetch('https://142.93.42.73:8000/community/login/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),

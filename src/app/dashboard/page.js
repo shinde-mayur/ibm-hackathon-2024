@@ -42,7 +42,7 @@ export default function DashboardPage() {
 
     const [communities, setCommunities] = useState([])
     useEffect(() => {
-        fetch('http://142.93.42.73:8000/community/')
+        fetch('https://142.93.42.73:8000/community/')
             .then((res) => res.json())
             .then((data) => {
                 setCommunities(data.result)

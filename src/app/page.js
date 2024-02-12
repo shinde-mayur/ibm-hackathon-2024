@@ -47,7 +47,7 @@ export default function DashboardPage() {
     const fetchUsers = (data) => {
         setIsBusy(true)
         setLabel('Filtering...')
-        fetch('http://142.93.42.73:8000/community/users/all/?' + new URLSearchParams(data))
+        fetch('https://142.93.42.73:8000/community/users/all/?' + new URLSearchParams(data))
             .then((res) => res.json())
             .then((data) => {
                 setUsers(data.users)
@@ -72,7 +72,7 @@ export default function DashboardPage() {
     }
 
     useEffect(() => {
-        fetch('http://142.93.42.73:8000/community/')
+        fetch('https://142.93.42.73:8000/community/')
             .then((res) => res.json())
             .then((data) => {
                 setCommunities(data.result)

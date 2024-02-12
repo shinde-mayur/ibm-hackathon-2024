@@ -25,7 +25,7 @@ export default function UserForm({ user, ethnicities, courses, courseYears }) {
         // 'ethnicity', 'course_year', 'course', 'location', 'bio', 'phone_number']
         var cookie = require("@boiseitguru/cookie-cutter");
         cookie.get('token',)
-        fetch('http://142.93.42.73:8000/community/user/', {
+        fetch('https://142.93.42.73:8000/community/user/', {
             method: 'POST',
             headers: {
                 'Authorization': `Token ${cookie.get('token',)}`,
