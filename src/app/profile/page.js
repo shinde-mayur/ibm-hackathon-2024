@@ -16,7 +16,7 @@ export default function ProfilePage() {
     useEffect(() => {
         var cookie = require("@boiseitguru/cookie-cutter");
         cookie.get('token',)
-        fetch('http://localhost:8000/community/user/', {
+        fetch('http://142.93.42.73:8000/community/user/', {
             headers: {
                 'Authorization': `Token ${cookie.get('token',)}`
             }
@@ -31,7 +31,7 @@ export default function ProfilePage() {
                 console.error('Error:', error);
                 setLoading(false);
             });
-        fetch('http://localhost:8000/community/')
+        fetch('http://142.93.42.73:8000/community/')
             .then((res) => res.json())
             .then((data) => {
 
