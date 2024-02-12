@@ -1,17 +1,13 @@
 'use client'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
+import { Bars3Icon, UserGroupIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname, useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 
 import Navigation from './navigation'
 const classNames = (...classes) => classes.filter(Boolean).join(' ')
 // import cookieCutter from 'cookie-cutter'
-const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-}
+
 
 export default function BasicLayout({ children, title, description, className }) {
     const router = useRouter()
@@ -41,9 +37,8 @@ export default function BasicLayout({ children, title, description, className })
                             <div className="flex h-16 items-center justify-between">
                                 <div className="flex items-center">
                                     <div className="flex-shrink-0">
-                                        <Image
-                                            className="h-8 w-8"
-                                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                        <UserGroupIcon
+                                            className="h-8 w-8 text-white"
                                             alt="Your Company"
                                         />
                                     </div>
@@ -121,10 +116,6 @@ export default function BasicLayout({ children, title, description, className })
                                 <div className="flex items-center px-5">
                                     <div className="flex-shrink-0">
                                         <UserIcon className="h-6 w-6 text-gray-400" />
-                                    </div>
-                                    <div className="ml-3">
-                                        <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                                        <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                                     </div>
 
                                 </div>

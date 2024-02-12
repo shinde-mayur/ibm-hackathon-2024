@@ -1,9 +1,9 @@
-import { redirect } from 'next/navigation'
-
-// import { useHistory } from 'react-router-dom';
-
 import LoginForm from '../components/login-form';
-import Image from 'next/image';
+
+import { UserGroupIcon } from '@heroicons/react/24/outline';
+export const metadata = {
+    title: 'Login to Continue | UniVicinity',
+}
 export default function LoginPage() {
 
 
@@ -13,9 +13,8 @@ export default function LoginPage() {
 
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-                    <Image
+                    <UserGroupIcon
                         className="mx-auto h-10 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                         alt="Your Company"
                     />
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -24,7 +23,7 @@ export default function LoginPage() {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <LoginForm  />
+                    <LoginForm />
 
                 </div>
             </div >
