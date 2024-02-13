@@ -2,11 +2,7 @@
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { memo, useCallback, useState } from 'react';
 
-
-import { toast } from 'react-toastify';
-
-const CommunityMap = ({ markers }) => {
-    const [currentLocation, setCurrentLocation] = useState(null);
+const CommunityMap = ({ markers, currentLocation, onMapLoad }) => {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -16,19 +12,7 @@ const CommunityMap = ({ markers }) => {
     const [map, setMap] = useState(null)
 
     const onLoad = useCallback((map) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    const { latitude, longitude } = position.coords;
-                    setCurrentLocation({ lat: latitude, lng: longitude });
-                },
-                error => {
-                    toast.error('Error getting current location:', error);
-                }
-            );
-        } else {
-            toast.error('Geolocation is not supported by this browser.');
-        }
+        onMapLoad(map)
         setMap(map);
     }, [])
 

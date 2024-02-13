@@ -1,6 +1,6 @@
 'use client'
 import { FunnelIcon, } from '@heroicons/react/20/solid'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import BasicLayout from './components/basic-layout'
 import CommunityMap from './components/community-map'
@@ -8,32 +8,6 @@ import Filter from './components/filter'
 import MobileFilter from './components/mobile-filter'
 import UserCard from './components/user-card'
 
-// const users = [
-//     {
-//         userName: "ab123",
-//         location: "LE1 1AB",
-//         bio: "this is my bio",
-//         ethnicity: 'asian',
-//         course: 'Comp Sci',
-//         year: 'UG1',
-//         firstName: "John",
-//         lastName: "Doe",
-//         email: "john@doe.com",
-//         phoneNum: 441234567890
-//     },
-//     {
-//         userName: "bc456",
-//         location: "LE1 2JS",
-//         bio: "I have just moved to leicester",
-//         ethnicity: 'white',
-//         course: 'Comp Sci',
-//         year: 'PG1',
-//         firstName: "Mary",
-//         lastName: "Sue",
-//         email: "mayr@sue.com",
-//         phoneNum: 4412345678912
-//     }
-// ]
 
 
 export default function DashboardPage() {
@@ -43,11 +17,15 @@ export default function DashboardPage() {
     const [isBusy, setIsBusy] = useState(false)
     const [label, setLabel] = useState(null)
     const [markers, setMarkers] = useState([])
+    const [currentLocation, setCurrentLocation] = useState(null);
 
-    const fetchUsers = (data) => {
+    const fetchUsers = (data, location) => {
         setIsBusy(true)
+
+        if (location) data = { ...data, lat: location.lat, long: location.lng }
+        const urlParams = new URLSearchParams(data)
         setLabel('Filtering...')
-        fetch('https://142.93.42.73:8000/community/users/all/?' + new URLSearchParams(data))
+        fetch('https://142.93.42.73:8000/community/users/all/?' + urlParams)
             .then((res) => res.json())
             .then((data) => {
                 setUsers(data.users)
@@ -68,7 +46,7 @@ export default function DashboardPage() {
         const ethnicity = formData.getAll('ethnicities[]')
         const course = formData.getAll('courses[]')
         const course_year = formData.getAll('course years[]')
-        fetchUsers({ ethnicity, course, course_year })
+        fetchUsers({ ethnicity, course, course_year }, currentLocation)
     }
 
     useEffect(() => {
@@ -81,9 +59,29 @@ export default function DashboardPage() {
                 toast.error('Error fetching communities');
                 console.error('Error:', error);
             });
-        fetchUsers()
 
     }, [])
+
+
+    const onMapLoad = useCallback((map) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    fetchUsers({}, { lat: latitude, lng: longitude })
+                    setCurrentLocation({ lat: latitude, lng: longitude })
+                },
+                error => {
+                    toast.error('Error getting current location:', error);
+                }
+            );
+        } else {
+            toast.error('Geolocation is not supported by this browser.');
+            fetchUsers()
+        }
+    }, [])
+
+
     return (
         <BasicLayout >
             <div className="bg-white rounded-md">
@@ -114,7 +112,7 @@ export default function DashboardPage() {
                                 <Filter filters={communities} onFilterClick={onFilterClick} isBusy={isBusy} label={label} />
                                 {/* Product grid */}
                                 <div className="lg:col-span-3">
-                                    <CommunityMap markers={markers} />
+                                    <CommunityMap markers={markers} onMapLoad={onMapLoad} currentLocation={currentLocation} />
                                     {
                                         users.length == 0 &&
                                         <div className="text-center py-8">
