@@ -18,7 +18,7 @@ export default function AboutPage() {
                         <div className="mb-8">
                             <h2 className="text-2xl font-semibold mb-4">Our Vision</h2>
                             <p className="text-lg">
-                                We envision a university campus where no student feels isolated, where diversity is celebrated, and where every student has the opportunity to thrive both academically and socially. UniVicinity is more than just a platform; it's a movement towards fostering real-time connections and building a supportive, dynamic campus community.
+                                We envision a university campus where no student feels isolated, where diversity is celebrated, and where every student has the opportunity to thrive both academically and socially. UniVicinity is more than just a platform; it&apos;s a movement towards fostering real-time connections and building a supportive, dynamic campus community.
                             </p>
                         </div>
                         <div className="mb-8">
@@ -44,13 +44,13 @@ export default function AboutPage() {
                         <div className="mb-8">
                             <h2 className="text-2xl font-semibold mb-4">Why UniVicinity?</h2>
                             <p className="text-lg">
-                                In today's digital age, the importance of physical community and connection cannot be overstated. UniVicinity stands out by focusing on the here and now—connecting students based on proximity, shared interests, and academic collaboration. Whether you're an international student seeking a sense of belonging or a local student looking to expand your social circle, UniVicinity is your gateway to a more fulfilling university experience.
+                                In today&apos;s digital age, the importance of physical community and connection cannot be overstated. UniVicinity stands out by focusing on the here and now—connecting students based on proximity, shared interests, and academic collaboration. Whether you&apos;re an international student seeking a sense of belonging or a local student looking to expand your social circle, UniVicinity is your gateway to a more fulfilling university experience.
                             </p>
                         </div>
                         <div className="text-center">
                             <h2 className="text-2xl font-semibold mb-2">Join the Movement</h2>
                             <p className="text-lg mb-6">
-                                We're on a mission to make every campus a connected, inclusive community. But we can't do it without you. Join UniVicinity today, and be a part of the change you wish to see on your campus.
+                                We&apos;re on a mission to make every campus a connected, inclusive community. But we can&apos;t do it without you. Join UniVicinity today, and be a part of the change you wish to see on your campus.
                             </p>
                         </div>
                     </div>
