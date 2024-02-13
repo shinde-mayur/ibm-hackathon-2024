@@ -37,7 +37,7 @@ export default function AboutPage() {
                                     <strong>Mayur Shinde (mss62):</strong> Our creative genius in frontend development. Mayur designs with the user in mind, crafting an intuitive and engaging interface that makes finding and connecting with peers seamless.
                                 </li>
                                 <li className="text-lg">
-                                    <strong>Dhrupal Shah (dps30):</strong> The visionary behind our design and database structure. Dhruv creates the visual and functional blueprint of UniVicinity, ensuring a cohesive and enjoyable user experience.
+                                    <strong>Dhrupal Shah (dps30):</strong> The visionary behind our design and database structure. Dhrupal creates the visual and functional blueprint of UniVicinity, ensuring a cohesive and enjoyable user experience.
                                 </li>
                             </ul>
                         </div>
