@@ -25,7 +25,13 @@ export default function DashboardPage() {
         if (location) data = { ...data, lat: location.lat, long: location.lng }
         const urlParams = new URLSearchParams(data)
         setLabel('Filtering...')
-        fetch('https://142.93.42.73:8000/community/users/all/?' + urlParams)
+        var cookie = require("@boiseitguru/cookie-cutter");
+        fetch('https://142.93.42.73:8000/community/users/all/?' + urlParams, {
+            headers: {
+                'Authorization': `Token ${cookie.get('token',)}`,
+                'Content-Type': 'application/json'
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setUsers(data.users)
