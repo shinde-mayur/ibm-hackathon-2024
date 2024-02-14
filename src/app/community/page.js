@@ -48,8 +48,7 @@ const CommunityList = ({ communities }) => {
                 <div key={community.title} className="bg-indigo-50 shadow-md rounded-md overflow-hidden">
                     <div className="flex">
                         <div className="p-4 w-1/5">
-                            <h3 className="text-lg font-semibold mb-2">{community.title}</h3>
-
+                            <h3 className="text-lg text-gray-700 font-semibold mb-2">{community.title}</h3>
                         </div>
                         <div className="p-4 w-4/5">
                             {community.options.map((item, index) => (

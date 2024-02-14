@@ -5,7 +5,7 @@ export default function UserCard({ user }) {
         <div key={user.username} className="bg-indigo-50 rounded-lg shadow-md hover:shadow-lg">
             <div className='pt-6 px-4'>
 
-                <h2 className="text-xl font-bold mr-2">
+                <h2 className="text-xl font-bold mr-2 text-gray-700">
                     {user.first_name + ' ' + user.last_name}
                 </h2>
                 <div className='py-1'>
