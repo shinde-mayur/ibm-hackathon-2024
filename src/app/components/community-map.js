@@ -6,7 +6,7 @@ const CommunityMap = ({ markers, currentLocation, onMapLoad }) => {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyA1zkTKA6IHfGKfbI3E3CukUOgI-eYPARk"
+        googleMapsApiKey: ""
     })
 
     const [map, setMap] = useState(null)
